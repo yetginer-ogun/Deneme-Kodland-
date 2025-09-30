@@ -17,6 +17,10 @@ async def start(ctx):
     await ctx.send("Merhaba! Ben bir sohbet yöneticisi botuyum!")
 
 @bot.command()
+async def selam(ctx):
+    await ctx.send(f"Merhaba! {ctx.author.mention}!")
+
+@bot.command()
 @commands.has_permissions(ban_members=True)
 async def ban(ctx, member: discord.Member = None):
     if member:

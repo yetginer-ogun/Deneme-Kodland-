@@ -1,10 +1,9 @@
 import discord
 from discord.ext import commands
 from config import token  # Botun tokenini config dosyasından içe aktarma
+import random
 
-intents = discord.Intents.default()
-intents.members = True  # Botun kullanıcılarla çalışmasına ve onları banlamasına izin verir
-intents.message_content = True
+intents = discord.Intents.all()
 
 bot = commands.Bot(command_prefix='!', intents=intents)
 
@@ -19,6 +18,26 @@ async def start(ctx):
 @bot.command()
 async def selam(ctx):
     await ctx.send(f"Merhaba! {ctx.author.mention}!")
+
+@bot.command()
+async def secim(ctx, a1, a2):
+    sonuc  = random.choice([a1,a2])
+    await ctx.send(sonuc)
+
+@bot.command()
+async def topla_eski(ctx, sayi1, sayi2):
+    sonuc = int(sayi1) + int(sayi2)
+    await ctx.send(sonuc)
+
+@bot.command()
+async def topla(ctx, *sayi):
+    a = 0
+    for x in sayi:
+        if x.isdigit():
+            a += int(x)
+    await ctx.send(f"Verdiğiniz sayıların toplamı = {a}")
+
+
 
 @bot.command()
 @commands.has_permissions(ban_members=True)
